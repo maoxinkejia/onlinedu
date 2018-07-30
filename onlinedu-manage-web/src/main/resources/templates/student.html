@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        .tree li {
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background: #F4F4F4;
+        }
+
+        table tbody td:nth-child(even) {
+            color: #C00;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div><a class="navbar-brand" style="font-size:32px;" href="#">后台管理平台</a></div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li style="padding-top:8px;">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-success dropdown-toggle"
+                                data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-user"></i> 张三 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
+                            <li class="divider"></li>
+                            <li><a href="index.html"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li style="margin-left:10px;padding-top:8px;">
+                    <button type="button" class="btn btn-default btn-danger">
+                        <span class="glyphicon glyphicon-question-sign"></span> 帮助
+                    </button>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div class="tree">
+                <ul style="padding-left:0px;" class="list-group">
+                    <li class="list-group-item tree-closed">
+                        <a th:href="'index'"><i class="glyphicon glyphicon-dashboard"></i> 后台管理</a>
+                    </li>
+                    <li class="list-group-item">
+                        <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 学员管理
+                            <span class="badge" style="float:right"></span>
+                        </span>
+                        <ul style="margin-top:10px;">
+                            <li style="height:30px;">
+                                <a th:href="'student.html'" style="color:red;"><i class="glyphicon glyphicon-user"></i>
+                                    学员列表</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="list-group-item tree-closed">
+                        <span><i class="glyphicon glyphicon-ok"></i> 教师管理 <span class="badge"
+                                                                                style="float:right"></span></span>
+                        <ul style="margin-top:10px;display:none;">
+                            <li style="height:30px;">
+                                <a href="auth_cert.html"><i class="glyphicon glyphicon-check"></i> 教师列表</a>
+                            </li>
+                            <li style="height:30px;">
+                                <a href="auth_adv.html"><i class="glyphicon glyphicon-check"></i> 添加讲师</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="list-group-item tree-closed">
+                        <span><i class="glyphicon glyphicon-th-large"></i> 课程管理 <span class="badge"
+                                                                                      style="float:right"></span></span>
+                        <ul style="margin-top:10px;display:none;">
+                            <li style="height:30px;">
+                                <a href="cert.html"><i class="glyphicon glyphicon-picture"></i> 专业管理</a>
+                            </li>
+                            <li style="height:30px;">
+                                <a href="type.html"><i class="glyphicon glyphicon-equalizer"></i> 课程管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 学生列表</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="selectStu" class="form-inline" role="form" style="float:left;" method="post">
+                        <div class="form-group has-feedback">
+                            <div class="input-group">
+                                <input id="email_tel" name="email_tel" style="width: 180px" class="form-control has-success" type="text" placeholder="邮箱/手机/昵称/姓名">
+                            </div>
+                            <div class="input-group">
+                                <select class="form-control">
+                                    <option>选择列表</option>
+                                    <option>正常</option>
+                                    <option>冻结</option>
+                                </select>
+                            </div>
+
+                            <label for="startTime">开始注册时间</label>
+                            <div class="input-group">
+                                <input id="startTime" style="width: 180px" class="form-control has-success" type="text" placeholder="开始注册时间">
+                            </div>
+
+                            <label for="endTime">—</label>
+                            <div class="input-group">
+                                <input id="endTime" style="width: 180px" class="form-control has-success" type="text" placeholder="结束注册时间">
+                            </div>
+                        </div>
+                        <button id="search" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i>查询学员</button>
+                        <button onclick="javascript:reloadForm()" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-refresh"></i>清空</button>
+                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-share-alt"></i>导出Excel</button>
+                    </form>
+                    <br>
+                    <hr style="clear:both;">
+                    <div class="table-responsive">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th><input type="checkbox"></th>
+                                <th>邮箱地址</th>
+                                <th>手机号码</th>
+                                <th>用户名称</th>
+                                <th>昵称</th>
+                                <th>性别</th>
+                                <th>年龄</th>
+                                <th>注册时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="11" align="center">
+                                    <ul class="pagination">
+                                        <li class="disabled"><a href="#">上一页</a></li>
+                                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">下一页</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/jquery/jquery-2.1.1.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/script/docs.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".list-group-item").click(function () {
+            if ($(this).find("ul")) {
+                $(this).toggleClass("tree-closed");
+                if ($(this).hasClass("tree-closed")) {
+                    $("ul", this).hide("fast");
+                } else {
+                    $("ul", this).show("fast");
+                }
+            }
+        });
+
+        queryStudents();
+
+    });
+
+    var json = {}
+
+   /* $("#statusBtn").click(function () {
+        $("")
+    });*/
+
+    //查询按钮的单机事件
+    $("#search").click(function () {
+        //拿到用来查询的关键字
+        var email_tel = $("#email_tel").val();
+        var statusBtn = $("#statusBtn").val();
+
+        //给json对象赋值
+        json.keyword = email_tel;
+        json.status = statusBtn;
+
+        queryStudents();
+    });
+
+
+    //根据收集到的关键字查询符合条件的学员信息
+    function queryStudents() {
+
+        //发送异步请求，对关键字进行查询
+        $.ajax({
+            type:"post",
+            url: "/queryStudents",
+            data: json,
+            success: function (result) {
+                if(result.success){
+                    var list = result.data;
+                    //准备拼串
+                    var content = '';
+                    $.each(list, function (i, e) {
+                        content += '<tr>';
+                        content += '	<td th:text="+(i+1)+"></td>';
+                        content += '	<td><input type="checkbox"></td>';
+                        content += '	<td width="160px">'+e.email+'</td>';
+                        content += '	<td width="80px">'+e.mobile+'</td>';
+                        content += '	<td width="80px">'+e.userName+'</td>';
+                        content += '	<td width="80px">'+e.showName+'</td>';
+                        content += '	<td width="50px">'+e.sex+'</td>';
+                        content += '	<td width="50px">'+e.age+'</td>';
+                        content += '	<td width="230px">'+e.createTime+'</td>';
+                        content += '	<td width="60px" >'+e.isAvalible+'</td>';
+                        content += '	<td><button type="button" class="btn btn-success btn-xs" onclick="editPwd('+e.userId+')"><i class=" glyphicon glyphicon-pencil" >修改密码</i></button>';
+                        content += '		<button type="button" class="btn btn-primary btn-xs" onclick="changeStatus('+e.userId+')"><i class=" glyphicon glyphicon glyphicon-asterisk" >冻结</i></button>';
+                        content += '		<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon glyphicon-file" >日志</i></button>';
+                        content += '	</td>';
+                        content += '</tr>';
+                    });
+
+                    //局部刷新
+                    $("tbody").html(content);
+                }
+            }
+        });
+    }
+
+
+    //改变账号状态
+    function changeStatus(userId) {
+        //拿到用户对应的id，挂在json上
+        json.id = userId;
+//        alert(json.id);
+        $.ajax({
+            type:"post",
+            url:"/changeStatus",
+            data: json,
+            success: function (result) {
+                if(result.success) {
+                    queryStudents();
+                }
+            }
+        });
+    }
+
+
+    function editPwd(userId) {
+        alert(userId);
+        window.location.href = "http://manage.edu.com/toEditPwd?userId="+userId;
+    }
+</script>
+</body>
+</html>

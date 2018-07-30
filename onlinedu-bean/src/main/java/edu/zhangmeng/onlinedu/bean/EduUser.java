@@ -1,37 +1,44 @@
 package edu.zhangmeng.onlinedu.bean;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
 public class EduUser implements Serializable {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
-
+    @Column
     private String mobile;
-
+    @Column
     private String email;
-
+    @Column
     private String password;
-
+    @Column
     private String userName;
-
+    @Column
     private String showName;
-
-    private Boolean sex;
-
-    private Byte age;
-
+    @Column
+    private Integer sex;
+    @Column
+    private Integer age;
+    @Column
     private Date createTime;
-
-    private Boolean isAvalible;
-
+    @Column
+    private Integer isAvalible;
+    @Column
     private String picImg;
-
+    @Column
     private String bannerUrl;
-
+    @Column
     private Integer msgNum;
-
+    @Column
     private Integer sysMsgNum;
-
+    @Column
     private Date lastSystemTime;
 
     public Integer getUserId() {
@@ -82,19 +89,19 @@ public class EduUser implements Serializable {
         this.showName = showName == null ? null : showName.trim();
     }
 
-    public Boolean getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public Byte getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(Byte age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -106,11 +113,11 @@ public class EduUser implements Serializable {
         this.createTime = createTime;
     }
 
-    public Boolean getIsAvalible() {
+    public Integer getIsAvalible() {
         return isAvalible;
     }
 
-    public void setIsAvalible(Boolean isAvalible) {
+    public void setIsAvalible(Integer isAvalible) {
         this.isAvalible = isAvalible;
     }
 

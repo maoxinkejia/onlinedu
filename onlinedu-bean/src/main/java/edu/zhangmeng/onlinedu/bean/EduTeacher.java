@@ -1,29 +1,36 @@
 package edu.zhangmeng.onlinedu.bean;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
 public class EduTeacher implements Serializable {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    @Column
     private String name;
-
+    @Column
     private String education;
-
-    private Boolean isStar;
-
+    @Column
+    private Integer isStar;
+    @Column
     private String picPath;
-
-    private Byte status;
-
+    @Column
+    private Integer status;
+    @Column
     private Date createTime;
-
+    @Column
     private Date updateTime;
-
+    @Column
     private Integer subjectId;
-
+    @Column
     private Integer sort;
-
+    @Column
     private String career;
 
     public Integer getId() {
@@ -50,11 +57,11 @@ public class EduTeacher implements Serializable {
         this.education = education == null ? null : education.trim();
     }
 
-    public Boolean getIsStar() {
+    public Integer getIsStar() {
         return isStar;
     }
 
-    public void setIsStar(Boolean isStar) {
+    public void setIsStar(Integer isStar) {
         this.isStar = isStar;
     }
 
@@ -66,11 +73,11 @@ public class EduTeacher implements Serializable {
         this.picPath = picPath == null ? null : picPath.trim();
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
