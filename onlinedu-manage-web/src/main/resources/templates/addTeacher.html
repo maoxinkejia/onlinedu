@@ -112,84 +112,57 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 教师列表</h3>
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 添加教师</h3>
                 </div>
                 <div class="panel-body">
                     <form id="queryTeacher" action="toTeacher.html" class="form-inline" role="form" style="float:left;" method="post">
                         <div class="form-group has-feedback">
-                            <label for="name">讲师名称</label>
-                            <div class="input-group">
-                                <input id="name" name="name" style="width: 150px" class="form-control has-success" type="text" placeholder="讲师名">
-                            </div>
-                            <div class="input-group">
-                                <select name="status" class="form-control">
+
+                            <label for="name">讲师名称：</label>
+                            <div id="name" class="input-group">
+                                <input name="name" style="width: 300px" class="form-control" type="text" placeholder="讲师名称">
+                            </div><br/><br/>
+
+                            <label for="education">讲师资历：</label>
+                            <div id="education" class="input-group">
+                                <textarea name="education" style="width:300px;height:50px;" placeholder="讲师资历"></textarea>
+                            </div><br/><br/>
+
+                            <label for="subjectId">讲师专业：</label>
+                            <div id="subjectId" class="input-group">
+                                <input name="subjectId" style="width: 180px" class="form-control has-success" type="text" placeholder="讲师专业">
+                            </div><br/><br/>
+
+                            <label for="isStar">讲师等级：</label>
+                            <div id="isStar" class="input-group">
+                                <select name="isStar" class="form-control">
                                     <option value="" >请选择</option>
                                     <option value="0">正常</option>
                                     <option value="1">删除</option>
                                 </select>
-                            </div>
+                            </div><br/><br/>
 
-                            <label for="createTime">添加时间</label>
-                            <div class="input-group">
-                                <input id="createTime" name="createTime" style="width: 180px" class="form-control has-success" type="text" placeholder="开始添加时间">
-                            </div>
+                            <label for="sort">讲师排序：</label>
+                            <div id="sort" class="input-group">
+                                <input name="sort" style="width: 150px" class="form-control has-success" type="text" placeholder="0">
+                            </div><br/><br/>
 
-                            <label for="updateTime">—</label>
-                            <div class="input-group">
-                                <input id="updateTime" name="updateTime" style="width: 180px" class="form-control has-success" type="text" placeholder="结束添加时间">
-                            </div>
-                        </div>
+                            <label for="career">讲师简介：</label>
+                            <div id="career" class="input-group">
+                                <textarea name="career" style="width:500px;height:100px;" placeholder="讲师简介"></textarea>
+                            </div><br/><br/>
+                            <label for="picPath">讲师头像：</label>
+                            <div id="picPath" class="input-group">
+                                <input name="picPath" class="form-control has-success" type="file">
+                            </div><br/><br/>
+
+                        </div><br/><br/>
                         <button onclick="search()" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i>查询</button>
                         <button onclick="reloadForm()" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-refresh"></i>清空</button>
                     </form>
-                    <br>
-                    <hr style="clear:both;">
-                    <div class="table-responsive">
-                        <table class="table  table-bordered">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>名称</th>
-                                <th>头衔</th>
-                                <th>资历</th>
-                                <th>简介</th>
-                                <th>添加时间</th>
-                                <th>排序</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="teacher:${teacherList}">
-                                    <td width="4%" th:text="${teacher.id}"></td>
-                                    <td width="6%" th:text="${teacher.name}">名称</td>
-                                    <td width="8%" th:text="${teacher.isStar}==1?'高级讲师':'首席讲师'">头衔</td>
-                                    <td width="12%" th:text="${teacher.education}">资历</td>
-                                    <td width="35%" th:text="${teacher.career}">简介</td>
-                                    <td width="18%" th:text="${teacher.createTime}">添加时间</td>
-                                    <td width="5%" th:text="${teacher.sort}">排序</td>
-                                    <td width="10%"><button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-pencil" th:text="'修改'"></i></button>
-                                        <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-remove" th:text="'删除'"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colspan="11" align="center">
-                                    <ul class="pagination">
-                                        <li class="disabled"><a href="#">上一页</a></li>
-                                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">下一页</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
 
-                            </tfoot>
-                        </table>
-                    </div>
+
+                    <br>
                 </div>
             </div>
         </div>

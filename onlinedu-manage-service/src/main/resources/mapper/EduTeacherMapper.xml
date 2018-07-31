@@ -3,12 +3,54 @@
 <mapper namespace="edu.zhangmeng.onlinedu.manage.mapper.EduTeacherMapper">
 
     <resultMap id="EduTeacherMap" type="edu.zhangmeng.onlinedu.bean.EduTeacher" autoMapping="true">
-        <id column="id" property="id"></id>
+        <id column="ID" property="id"></id>
     </resultMap>
 
 
     <!--List<EduTeacher> selectAllOrderBySort();-->
     <select id="selectAllOrderBySort" resultMap="EduTeacherMap">
+        SELECT
+          ID,
+          `NAME`,
+          EDUCATION,
+          CAREER,
+          IS_STAR,
+          `STATUS`,
+          CREATE_TIME,
+          SORT,
+          SUBJECT_ID
+        FROM edu_teacher
+        ORDER BY SORT DESC
+    </select>
 
+
+    <!--List<EduTeacher> selectByKeyword(EduTeacher eduTeacher);-->
+    <select id="selectByKeyword" resultMap="EduTeacherMap">
+        SELECT
+          ID,
+          `NAME`,
+          EDUCATION,
+          CAREER,
+          IS_STAR,
+          `STATUS`,
+          CREATE_TIME,
+          SORT,
+          SUBJECT_ID
+        FROM edu_teacher
+        <where>
+            <if test="name!=null &amp;&amp;name!=&quot;&quot;">
+                AND name LIKE CONCAT(CONCAT('%',#{name}),'%')
+            </if>
+            <if test="status!=null &amp;&amp;status!=&quot;&quot;">
+                AND status = #{status}
+            </if>
+            <if test="date1!=null &amp;&amp; date1!=&quot;&quot;">
+                AND create_time LIKE CONCAT(CONCAT('%',#{date1}),'%')
+            </if>
+            <if test="date2!=null &amp;&amp;date2!=&quot;&quot;">
+                AND update_time LIKE CONCAT(CONCAT('%',#{date2}),'%')
+            </if>
+        </where>
+        ORDER BY SORT DESC
     </select>
 </mapper>

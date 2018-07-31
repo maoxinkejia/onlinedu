@@ -20,4 +20,11 @@ public class TeacherServiceImpl implements TeacherService {
         return eduTeacherMapper.selectAllOrderBySort();
     }
 
+    @Override
+    public List<EduTeacher> queryByKeyword(EduTeacher eduTeacher) {
+        System.out.println(eduTeacher.getDate1());
+        System.out.println(eduTeacher.getDate2());
+        return eduTeacherMapper.selectByKeyword(eduTeacher);
+    }
+
 }

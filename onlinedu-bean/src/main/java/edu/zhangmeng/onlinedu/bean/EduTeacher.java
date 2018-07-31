@@ -1,9 +1,6 @@
 package edu.zhangmeng.onlinedu.bean;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -32,6 +29,26 @@ public class EduTeacher implements Serializable {
     private Integer sort;
     @Column
     private String career;
+    @Transient
+    private String date1;
+    @Transient
+    private String date2;
+
+    public String getDate1() {
+        return date1;
+    }
+
+    public void setDate1(String date1) {
+        this.date1 = date1;
+    }
+
+    public String getDate2() {
+        return date2;
+    }
+
+    public void setDate2(String date2) {
+        this.date2 = date2;
+    }
 
     public Integer getId() {
         return id;
@@ -119,5 +136,24 @@ public class EduTeacher implements Serializable {
 
     public void setCareer(String career) {
         this.career = career == null ? null : career.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "EduTeacher{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", education='" + education + '\'' +
+                ", isStar=" + isStar +
+                ", picPath='" + picPath + '\'' +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", subjectId=" + subjectId +
+                ", sort=" + sort +
+                ", career='" + career + '\'' +
+                ", date1='" + date1 + '\'' +
+                ", date2='" + date2 + '\'' +
+                '}';
     }
 }
