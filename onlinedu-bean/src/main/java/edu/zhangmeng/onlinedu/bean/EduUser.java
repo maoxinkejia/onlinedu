@@ -23,13 +23,13 @@ public class EduUser implements Serializable {
     @Column
     private String showName;
     @Column
-    private Integer sex;
+    private String sex;
     @Column
     private Integer age;
     @Column
     private Date createTime;
     @Column
-    private Integer isAvalible;
+    private String isAvalible;
     @Column
     private String picImg;
     @Column
@@ -89,11 +89,15 @@ public class EduUser implements Serializable {
         this.showName = showName == null ? null : showName.trim();
     }
 
-    public Integer getSex() {
-        return sex;
+    public String getSex() {
+        if ("1".equals(sex)) {
+            return "男";
+        } else {
+            return "女";
+        }
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -113,11 +117,15 @@ public class EduUser implements Serializable {
         this.createTime = createTime;
     }
 
-    public Integer getIsAvalible() {
-        return isAvalible;
+    public String getIsAvalible() {
+        if ("1".equals(isAvalible)) {
+            return "正常";
+        } else {
+            return "冻结";
+        }
     }
 
-    public void setIsAvalible(Integer isAvalible) {
+    public void setIsAvalible(String isAvalible) {
         this.isAvalible = isAvalible;
     }
 

@@ -275,7 +275,7 @@
     function changeStatus(userId) {
         //拿到用户对应的id，挂在json上
         json.id = userId;
-//        alert(json.id);
+        alert(json.id);
         $.ajax({
             type:"post",
             url:"/changeStatus",

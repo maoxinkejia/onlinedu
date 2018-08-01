@@ -167,8 +167,9 @@
                                     <td width="35%" th:text="${teacher.career}">简介</td>
                                     <td width="18%" th:text="${teacher.createTime}">添加时间</td>
                                     <td width="5%" th:text="${teacher.sort}">排序</td>
-                                    <td width="10%"><button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-pencil" th:text="'修改'"></i></button>
-                                        <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-remove" th:text="'删除'"></i></button>
+                                    <td width="10%">
+                                        <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-pencil" th:text="'修改'"></i></button>
+                                        <button th:onclick="'delTeacher('+${teacher.id}+')'" type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-remove" th:text="'删除'"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -213,6 +214,19 @@
         });
     });
 
+
+    //删除教师
+    function delTeacher(id) {
+        alert(id);
+        if (confirm("确认要删除该教师么？")) {
+            window.location.href = "/delTeacher?id=" + id;
+        }
+
+    }
+
+
+
+
     var teacherJson = {};
 
     //根据查询条件查询对应的教师
@@ -239,6 +253,7 @@
     function reloadForm() {
         $("#queryTeacher").submit();
     }
+
 
 </script>
 </body>

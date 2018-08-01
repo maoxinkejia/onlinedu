@@ -52,9 +52,18 @@ public class TeacherController {
         return "teacher";
     }
 
+    //去往添加教师页面
     @RequestMapping("addTeacher")
     public String addTeacher() {
         return "addTeacher";
+    }
+
+    //根据id删除教师
+    @RequestMapping("delTeacher")
+    public String delTeacher(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        teacherService.deleteTeacher(id);
+        return "redirect://manage.edu.com/toTeacher.html";
     }
 
 }

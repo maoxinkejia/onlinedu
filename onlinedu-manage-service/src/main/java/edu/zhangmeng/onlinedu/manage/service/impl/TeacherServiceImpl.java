@@ -27,4 +27,11 @@ public class TeacherServiceImpl implements TeacherService {
         return eduTeacherMapper.selectByKeyword(eduTeacher);
     }
 
+    @Override
+    public void deleteTeacher(String id) {
+        Example example = new Example(EduTeacher.class);
+        example.createCriteria().andEqualTo("id", id);
+        eduTeacherMapper.deleteByExample(example);
+    }
+
 }

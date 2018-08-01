@@ -11,4 +11,7 @@ public interface TeacherService {
 
     //根据条件查询教师
     List<EduTeacher> queryByKeyword(EduTeacher eduTeacher);
+
+    //删除教师
+    void deleteTeacher(String id);
 }
