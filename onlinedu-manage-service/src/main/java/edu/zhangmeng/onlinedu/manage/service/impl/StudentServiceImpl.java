@@ -43,17 +43,16 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void changeStatus(Integer userId) {
         //
-       EduUser eduUser = new EduUser();
+        EduUser eduUser = new EduUser();
         eduUser.setUserId(userId);
         //根据用户id查询一个用户对象出来
-//        EduUser user = eduUserMapper.selectOne(eduUser);
-        EduUser user = eduUserMapper.selectByPrimaryKey(eduUser);
+        EduUser user = eduUserMapper.selectOne(eduUser);
         //拿到用户的账号状态
-        String isAvalible = user.getIsAvalible();
-        if ("正常".equals(isAvalible)) {
-            user.setIsAvalible("2");
+        Integer isAvalible = user.getIsAvalible();
+        if (isAvalible == 1) {
+            user.setIsAvalible(2);
         } else {
-            user.setIsAvalible("1");
+            user.setIsAvalible(1);
         }
 
         eduUserMapper.updateByPrimaryKeySelective(user);

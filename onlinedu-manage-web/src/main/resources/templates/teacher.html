@@ -88,7 +88,7 @@
                                 <a href="toTeacher.html"><i class="glyphicon glyphicon-check"></i> 教师列表</a>
                             </li>
                             <li style="height:30px;">
-                                <a href="addTeacher.html"><i class="glyphicon glyphicon-check"></i> 添加讲师</a>
+                                <a href="toAddTeacher.html"><i class="glyphicon glyphicon-check"></i> 添加讲师</a>
                             </li>
                         </ul>
                     </li>
@@ -122,10 +122,10 @@
                                 <input id="name" name="name" style="width: 150px" class="form-control has-success" type="text" placeholder="讲师名">
                             </div>
                             <div class="input-group">
-                                <select name="status" class="form-control">
+                                <select name="isStar" class="form-control">
                                     <option value="" >请选择</option>
-                                    <option value="0">正常</option>
-                                    <option value="1">删除</option>
+                                    <option value="1">高级讲师</option>
+                                    <option value="2">首席讲师</option>
                                 </select>
                             </div>
 
@@ -168,7 +168,7 @@
                                     <td width="18%" th:text="${teacher.createTime}">添加时间</td>
                                     <td width="5%" th:text="${teacher.sort}">排序</td>
                                     <td width="10%">
-                                        <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-pencil" th:text="'修改'"></i></button>
+                                        <button th:onclick="'editTeacher('+${teacher.id}+')'" type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-pencil" th:text="'修改'"></i></button>
                                         <button th:onclick="'delTeacher('+${teacher.id}+')'" type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-remove" th:text="'删除'"></i></button>
                                     </td>
                                 </tr>
@@ -215,6 +215,13 @@
     });
 
 
+    //修改教师
+    function editTeacher(id) {
+        window.location.href = "/toEditTeacher?id=" + id;
+
+    }
+
+
     //删除教师
     function delTeacher(id) {
         alert(id);
@@ -224,30 +231,11 @@
 
     }
 
-
-
-
     var teacherJson = {};
 
     //根据查询条件查询对应的教师
     function search() {
-
         $("#queryTeacher").submit();
-
-        /*teacherJson.name = $("#name").val();
-        teacherJson.createTime = $("#createTime").val();
-        teacherJson.updTime = $("#updateTime").val();
-
-        $.ajax({
-            type: "post",
-            url:"searchTeacher",
-            data:json,
-            success:function (result) {
-                if(result.success) {
-                    window.location.href = "http://manage.edu.com/"
-                }
-            }
-        });*/
     }
 
     function reloadForm() {

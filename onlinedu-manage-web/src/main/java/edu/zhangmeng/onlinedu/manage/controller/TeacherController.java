@@ -1,7 +1,6 @@
 package edu.zhangmeng.onlinedu.manage.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import edu.zhangmeng.onlinedu.bean.EduTeacher;
 import edu.zhangmeng.onlinedu.service.TeacherService;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,7 @@ public class TeacherController {
     public String teacher(Model model, HttpServletRequest request) {
         //获取表单参数
         String name = request.getParameter("name");
-        String status = request.getParameter("status");
+        String isStar = request.getParameter("isStar");
         String createTime = request.getParameter("createTime");
         String updateTime = request.getParameter("updateTime");
         System.out.println(createTime);
@@ -38,8 +37,8 @@ public class TeacherController {
         if (name != null && name.length()>0) {
             eduTeacher.setName(name);
         }
-        if (status != null && status.length()>0) {
-            eduTeacher.setStatus(Integer.parseInt(status));
+        if (isStar != null && isStar.length()>0) {
+            eduTeacher.setIsStar(Integer.parseInt(isStar));
         }
 
         if (eduTeacher != null) {
@@ -53,8 +52,8 @@ public class TeacherController {
     }
 
     //去往添加教师页面
-    @RequestMapping("addTeacher")
-    public String addTeacher() {
+    @RequestMapping("toAddTeacher")
+    public String toAddTeacher() {
         return "addTeacher";
     }
 
@@ -65,5 +64,57 @@ public class TeacherController {
         teacherService.deleteTeacher(id);
         return "redirect://manage.edu.com/toTeacher.html";
     }
+
+
+    @RequestMapping("addTeacher")
+    public String addTeacher(HttpServletRequest request) {
+        //name education subjectId isStar sort career
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String education = request.getParameter("education");
+        String subjectId = request.getParameter("subjectId");
+        String isStar = request.getParameter("isStar");
+        String sort = request.getParameter("sort");
+        String career = request.getParameter("career");
+
+        EduTeacher eduTeacher = new EduTeacher();
+
+        if (name != null && name.length() > 0) {
+            eduTeacher.setName(name);
+        }
+        if (education != null && education.length() > 0) {
+            eduTeacher.setEducation(education);
+        }
+        if (subjectId != null && subjectId.length() > 0) {
+            eduTeacher.setSubjectId(Integer.parseInt(subjectId));
+        }
+        if (isStar != null && isStar.length() > 0) {
+            eduTeacher.setIsStar(Integer.parseInt(isStar));
+        }
+        if (sort != null && sort.length() > 0) {
+            eduTeacher.setSort(Integer.parseInt(sort));
+        }
+        if (career != null && career.length() > 0) {
+            eduTeacher.setCareer(career);
+        }
+
+        if (id != null) {
+            eduTeacher.setId(Integer.parseInt(id));
+            teacherService.editTeacher(eduTeacher);
+        } else {
+            teacherService.saveTeacher(eduTeacher);
+        }
+        return "redirect://manage.edu.com/toTeacher.html";
+    }
+
+    //去往修改教师页面
+    @RequestMapping("/toEditTeacher")
+    public String toEditTeacher(HttpServletRequest request,Model model) {
+        String id = request.getParameter("id");
+        EduTeacher eduTeacher = teacherService.queryById(id);
+        model.addAttribute("eduTeacher", eduTeacher);
+        return "editTeacher";
+    }
+
 
 }

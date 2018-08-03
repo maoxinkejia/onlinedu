@@ -7,6 +7,7 @@ import edu.zhangmeng.onlinedu.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,8 +23,6 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<EduTeacher> queryByKeyword(EduTeacher eduTeacher) {
-        System.out.println(eduTeacher.getDate1());
-        System.out.println(eduTeacher.getDate2());
         return eduTeacherMapper.selectByKeyword(eduTeacher);
     }
 
@@ -32,6 +31,23 @@ public class TeacherServiceImpl implements TeacherService {
         Example example = new Example(EduTeacher.class);
         example.createCriteria().andEqualTo("id", id);
         eduTeacherMapper.deleteByExample(example);
+    }
+
+    @Override
+    public void saveTeacher(EduTeacher eduTeacher) {
+        eduTeacher.setCreateTime(new Date());
+        eduTeacherMapper.insertSelective(eduTeacher);
+    }
+
+    @Override
+    public EduTeacher queryById(String id) {
+        return eduTeacherMapper.selectByPrimaryKey(Integer.parseInt(id));
+    }
+
+    @Override
+    public void editTeacher(EduTeacher eduTeacher) {
+        eduTeacher.setUpdateTime(new Date());
+        eduTeacherMapper.updateByPrimaryKeySelective(eduTeacher);
     }
 
 }

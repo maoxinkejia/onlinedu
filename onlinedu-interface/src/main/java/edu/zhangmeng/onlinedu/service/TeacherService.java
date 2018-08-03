@@ -14,4 +14,13 @@ public interface TeacherService {
 
     //删除教师
     void deleteTeacher(String id);
+
+    //添加教师
+    void saveTeacher(EduTeacher eduTeacher);
+
+    //根据主键查询教师信息用来修改
+    EduTeacher queryById(String id);
+
+    //修改教师
+    void editTeacher(EduTeacher eduTeacher);
 }
